@@ -1,11 +1,21 @@
 #include "../include/solutions.h"
 
 void solveDay1(char input[BUFSIZE][LINESIZE]) {
-  int i = 0;
-  while(input[i][0] != '\0') {
-    printf("%s", input[i]);
-    i++;
+  int sum = 0;
+  for(int i = 0; input[i][0] != '\0'; i++) {
+    int first = -1;
+    int last = -1;
+    for(int j = 0; input[i][j] != '\n'; j++) {
+      if(input[i][j] - '0' >= 0 && input[i][j] - '0' <= 9) {
+	if(first == -1 && last == -1)
+	  first = input[i][j] - '0';
+	last = input[i][j] - '0';
+      }
+    }
+    sum += (first*10) + last;
   }
+
+  printf("Answer to Part one: %i\n", sum);
 }
 void solveDay2(char input[BUFSIZE][LINESIZE]) {
   

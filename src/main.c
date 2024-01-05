@@ -6,8 +6,7 @@
 
 int main(int argc, char *argv[]) {
   char input[BUFSIZE][LINESIZE];
-
-  if(strcmp(argv[1], "day1") == 0) {
+    if(strcmp(argv[1], "day1") == 0) {
     read_file("input/day1", input);
     solveDay1(input);
   } else if(strcmp(argv[1], "day2") == 0) {
