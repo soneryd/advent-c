@@ -1,7 +1,7 @@
 #ifndef DAY1H
 #define DAY1H
 
-#include "../util/read_file.h"
+#include "../util/utils.h"
 
 void solveDay1(char input[BUFSIZE][LINESIZE]);
 void solveDay2(char input[BUFSIZE][LINESIZE]);

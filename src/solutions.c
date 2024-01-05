@@ -1,6 +1,7 @@
 #include "../include/solutions.h"
 
 void solveDay1(char input[BUFSIZE][LINESIZE]) {
+  // Part 1
   int sum = 0;
   for(int i = 0; input[i][0] != '\0'; i++) {
     int first = -1;
@@ -16,6 +17,33 @@ void solveDay1(char input[BUFSIZE][LINESIZE]) {
   }
 
   printf("Answer to Part one: %i\n", sum);
+
+  // Part 2
+  sum = 0;
+  for(int i = 0; input[i][0] != '\0'; i++) {
+    int first = -1;
+    int last = -1;
+    for(int j = 0; input[i][j] != '\n'; j++) {
+      if(input[i][j] - '0' >= 0 && input[i][j] - '0' <= 9) {
+	if(first == -1 && last == -1)
+	  first = input[i][j] - '0';
+	last = input[i][j] - '0';
+      } else {
+	int len = -1;
+	int *lenptr;
+	lenptr = &len;
+	int digit = strToDigit(input[i]+j, lenptr);
+	if(digit != -1) {
+	  if(first == -1 && last == -1)
+	    first = digit;
+	  last = digit;
+	}
+      }
+    }
+    sum += (first*10) + last;
+  }
+
+  printf("Answer to Part two: %i\n", sum);
 }
 void solveDay2(char input[BUFSIZE][LINESIZE]) {
   
