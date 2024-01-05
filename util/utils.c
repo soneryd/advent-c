@@ -98,3 +98,11 @@ int getSubStr(int pos, int len, char *str, char *substr) {
   substr[i] = '\0';
   return len;
 }
+
+int getCharPos(char *str, char ch) {
+  int i = 0;
+  while(str[i] != ch && str[i] != '\n') {
+    i++;
+  }
+  return i;
+}

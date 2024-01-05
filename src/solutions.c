@@ -45,8 +45,15 @@ void solveDay1(char input[BUFSIZE][LINESIZE]) {
 
   printf("Answer to Part two: %i\n", sum);
 }
+
 void solveDay2(char input[BUFSIZE][LINESIZE]) {
-  
+  for(int i = 0; input[i][0] != '\0'; i++) {
+    int pos = getCharPos(input[i], ':');
+    int endPos = getCharPos(input[i], '\n');
+    char subStr[LINESIZE];
+    getSubStr(pos+2, endPos-pos-2, input[i], subStr);
+    printf("%s\n", subStr);
+  }
 }
 void solveDay3(char input[BUFSIZE][LINESIZE]) {
   

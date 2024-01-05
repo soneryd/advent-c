@@ -5,6 +5,12 @@
 #include "../include/solutions.h"
 
 int main(int argc, char *argv[]) {
+
+  if(argc < 2) {
+    printf("Two few arguments...\n");
+    return 0;
+  }
+
   char input[BUFSIZE][LINESIZE];
     if(strcmp(argv[1], "day1") == 0) {
     read_file("input/day1", input);
