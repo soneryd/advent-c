@@ -87,7 +87,7 @@ int strToDigit(char *str, int *len) {
 int getSubStr(int pos, int len, char *str, char *substr) {
   int i = 0;
   while(i < len) {
-    if(str[pos + i] == '\0' || str[pos + i] == '\n') {
+    if(str[pos + i] == '\0') {
       substr[0] = '\0';
       return -1;
     }
@@ -101,8 +101,21 @@ int getSubStr(int pos, int len, char *str, char *substr) {
 
 int getCharPos(char *str, char ch) {
   int i = 0;
-  while(str[i] != ch && str[i] != '\n') {
+  while(str[i] != ch && str[i] != '\n' && str[i] != '\0') {
     i++;
   }
   return i;
 }
+
+int colorFromString(char *str) {
+  if(strcmp(str, "red") == 0) {
+    return RED;
+  } else if(strcmp(str, "green") == 0) {
+    return GREEN;
+  } else if(strcmp(str, "blue") == 0) {
+    return BLUE;
+  } else {
+    return -1;
+  }
+}
+
