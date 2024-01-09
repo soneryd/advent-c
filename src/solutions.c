@@ -48,89 +48,54 @@ void solveDay1(char input[BUFSIZE][LINESIZE]) {
 
 void solveDay2(char input[BUFSIZE][LINESIZE]) {
   // Part 1
+  int gameIdSum = 0;
+    
   for(int i = 0; input[i][0] != '\0'; i++) {
-    char subStr[LINESIZE];
+    int pos = getCharPos(input[i], ' ');
     int endPos = getCharPos(input[i], '\n');
-    int pos = getCharPos(input[i], ':');
-    getSubStr(pos+2, endPos-pos-2, input[i], subStr);
-    endPos = getCharPos(subStr, '\n');
+    getSubStr(pos+1, endPos-pos-1, input[i], input[i]);
+
+    int gameId = atoi(input[i]);
+    pos = getCharPos(input[i], ' ');
+    endPos = getCharPos(input[i], '\n');
+    getSubStr(pos+1, endPos-pos-1, input[i], input[i]);
 
     // Strip non-numerical or alphabetical characters
-    while((pos = getCharPos(subStr, ';')) != endPos || (pos = getCharPos(subStr, ',')) != endPos) {
-      subStr[pos] = ' ';
+    while((pos = getCharPos(input[i], ';')) != endPos || (pos = getCharPos(input[i], ',')) != endPos) {
+      input[i][pos] = ' ';
     }
 
-    while((pos = getCharPos(subStr, ' ' != endPos))) {
+    while((pos = getCharPos(input[i], ' ' != endPos))) {
       // Consume number
       int num;
-      while(subStr[0] >= '0' && subStr[0] <= '9') {
-	endPos = getCharPos(subStr, '\n');
-	num = atoi(subStr);
+      while(input[i][0] >= '0' && input[i][0] <= '9') {
+	
+	num = atoi(input[i]);
 
-	if(num > 9) {
-	  getSubStr(3, endPos-3, subStr, subStr);
-	} else {
-	  getSubStr(2, endPos-2, subStr, subStr);
-	}
+	pos = getCharPos(input[i], ' ');
+	endPos = getCharPos(input[i], '\n');
+	getSubStr(pos, endPos-pos, input[i], input[i]);
       }
 
       // Consume color
       char colorStr[LINESIZE];
-      pos = getCharPos(subStr, ' ');
-      getSubStr(0, pos, subStr, colorStr);
-      //printf("%s\n", colorStr);
+      pos = getCharPos(input[i], ' ');
+      getSubStr(0, pos, input[i], colorStr);
 
-      endPos = getCharPos(subStr, '\n');
-      if(colorFromString(colorStr) == RED) {
-	getSubStr(3, endPos-3, subStr, subStr);
+      // Check color + num
+      int color = colorFromString(colorStr);
+      if(num > (color + 12) && color >= 0) {
+	  gameId = 0;
       }
-      else if(colorFromString(colorStr) == GREEN) {
-	getSubStr(3, endPos-3, subStr, subStr);
-      }
-      else if(colorFromString(colorStr) == BLUE) {
-	getSubStr(3, endPos-3, subStr, subStr);
-      } else {
-	printf("COLOR: %s :( \n", colorStr);
-	getSubStr(1, endPos-1, subStr, subStr);
-      }
+
+      pos = getCharPos(input[i], ' ');
+      endPos = getCharPos(input[i], '\n');
+      getSubStr(pos+1, endPos-pos-1, input[i], input[i]);
     }
+
+    gameIdSum += gameId;
   }
-    
-  /*   while((pos = getCharPos(input[i], ':')) != endPos || (pos = getCharPos(input[i], ';')) != endPos) { */
-  /*     input[i][pos] = ' '; */
-  /*     int pos2 = getCharPos(input[i], ';'); */
-  /*     getSubStr(pos+2, pos2-pos, input[i], subStr); */
-
-  /*     int subStrEndPos = getCharPos(subStr, '\n'); */
-
-  /*     // Get # and color */
-  /*     char subStr2[LINESIZE]; */
-  /*     char colorStr9[LINESIZE]; */
-
-  /*     pos = getCharPos(subStr, ','); */
-  /*     getSubStr(0, pos, subStr, subStr2); */
-  /*     int num = atoi(subStr2); */
-
-  /*     pos = getCharPos(subStr2, ' '); */
-  /*     pos2 = getCharPos(subStr2, '\0'); */
-  /*     getSubStr(pos, pos2-pos, subStr2, colorStr); */
-  /*     printf("Color: %s, number: %i\n", colorStr, num); */
-
-  /*     while((pos = getCharPos(subStr, ',')) != subStrEndPos) { */
-  /* 	subStr[pos] = ' '; */
-  /* 	printf("ENTERING SUBSTR: %s\n", subStr); */
-  /* 	pos2 = getCharPos(subStr, ','); */
-  /* 	getSubStr(pos+2, pos2-pos-2, subStr, subStr2); */
-  /* 	int num = atoi(subStr2); */
-  /* 	pos = getCharPos(subStr2, ' '); */
-  /* 	pos2 = getCharPos(subStr2, ';'); */
-  /* 	getSubStr(pos, pos2-pos, subStr2, colorStr); */
-  /* 	printf("Color: %s, number: %i\n", colorStr, num); */
-  /*     } */
-  /*     //printf("%s\n", subStr); */
-  /*   } */
-  /*   printf("\n ---- \n"); */
-  /* } */
+  printf("Answer to Part one: %i\n", gameIdSum);  
 }
 void solveDay3(char input[BUFSIZE][LINESIZE]) {
   
